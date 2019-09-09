@@ -176,9 +176,9 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:https://gitlab.ontotext.com/graphdb-team/rdfrank-plugin.git</connection>
-		<developerConnection>scm:git:https://gitlab.ontotext.com/graphdb-team/rdfrank-plugin.git</developerConnection>
-		<url>https://gitlab.ontotext.com/graphdb-team/rdfrank-plugin.git</url>
+		<connection>scm:git:https://github.com/Ontotext-AD/graphdb-rdfrank-plugin.git</connection>
+		<developerConnection>scm:git:https://github.com/Ontotext-AD/graphdb-rdfrank-plugin.git</developerConnection>
+		<url>https://github.com/Ontotext-AD/graphdb-rdfrank-plugin</url>
 		<tag>HEAD</tag>
 	</scm>
 
