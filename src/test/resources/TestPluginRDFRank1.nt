@@ -1,0 +1,5 @@
+@prefix : <http://www.ontotext.com/owlim/rdfrank/test#> .
+
+:a :p :b .
+:a :p :c .
+:b :p :c .
