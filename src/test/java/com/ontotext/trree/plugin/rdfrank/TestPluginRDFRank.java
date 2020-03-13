@@ -1,7 +1,6 @@
 package com.ontotext.trree.plugin.rdfrank;
 
 import com.ontotext.test.TemporaryLocalFolder;
-import com.ontotext.test.utils.TestUtil;
 import com.ontotext.test.utils.Utils;
 import com.ontotext.trree.OwlimSchemaRepository;
 import com.ontotext.trree.entitypool.EntityPoolConnection;
@@ -29,17 +28,17 @@ import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class TestPluginRDFRank {
-	private static final String NAMESPACE = RDFRank.NAMESPACE;
+	protected static final String NAMESPACE = RDFRank.NAMESPACE;
 
-	private static final int DEFAULT_ITERATIONS = 10;
-	private static final double DEFAULT_EPSILON = 0;
+	protected static final int DEFAULT_ITERATIONS = 10;
+	protected static final double DEFAULT_EPSILON = 0;
 
 	private SailRepository repository;
-	private SailConnection sailConn;
-	private RepositoryConnection connection;
-	private OwlimSchemaRepository schema;
+	protected SailConnection sailConn;
+	protected RepositoryConnection connection;
+	protected OwlimSchemaRepository schema;
 
-	private boolean useUpdate;
+	protected boolean useUpdate;
 
 	@Rule
 	public TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
@@ -80,7 +79,7 @@ public class TestPluginRDFRank {
 		schema.shutDown();
 	}
 
-	private void load(String fileName) {
+	protected void load(String fileName) {
 		try {
 			RDFFormat format = null;
 			if (fileName.endsWith(".rdf") || fileName.endsWith(".owl")) {
@@ -88,6 +87,9 @@ public class TestPluginRDFRank {
 			}
 			if (fileName.endsWith(".nt") || fileName.endsWith(".n3")) {
 				format = RDFFormat.N3;
+			}
+			if (fileName.endsWith(".ttls")) {
+				format = RDFFormat.TURTLESTAR;
 			}
 			connection.add(TestPluginRDFRank.class.getResourceAsStream("/" + fileName), NAMESPACE, format);
 			connection.commit();
@@ -122,7 +124,7 @@ public class TestPluginRDFRank {
 		}
 	}
 
-	private void recomputeRank(double epsilon, int iteratrions) {
+	protected void recomputeRank(double epsilon, int iteratrions) {
 		assertTrue(exec("{<" + RDFRank.EPSILON + "> <" + RDFRank.SET_PARAM + "> \"" + epsilon + "\"}"));
 		assertTrue(exec("{<" + RDFRank.MAX_ITERATIONS + "> <" + RDFRank.SET_PARAM + "> \"" + iteratrions
 				+ "\"}"));

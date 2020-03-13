@@ -1,0 +1,5 @@
+@prefix : <http://www.ontotext.com/owlim/rdfrank/test#> .
+
+<<:a <urn:1> <urn:2>>> :p <<:b <urn:5> <urn:8>>> .
+<<:a <urn:1> <urn:2>>> :p <<:c <urn:10> <urn:15>>> .
+<<:b <urn:5> <urn:8>>> :p <<:c <urn:10> <urn:15>>> .

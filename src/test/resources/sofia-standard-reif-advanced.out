@@ -1,0 +1,160 @@
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type 0.00
+http://www.w3.org/1999/02/22-rdf-syntax-ns#Property 0.00
+http://www.w3.org/2000/01/rdf-schema#Class 0.00
+http://www.w3.org/2000/01/rdf-schema#Resource 0.00
+http://www.w3.org/2000/01/rdf-schema#subPropertyOf 0.00
+http://www.w3.org/2000/01/rdf-schema#subClassOf 0.00
+http://www.w3.org/2000/01/rdf-schema#domain 0.00
+http://www.w3.org/2000/01/rdf-schema#range 0.00
+http://www.w3.org/2002/07/owl#sameAs 0.00
+http://www.w3.org/2002/07/owl#SymmetricProperty 0.00
+http://www.w3.org/2002/07/owl#TransitiveProperty 0.00
+http://www.w3.org/2002/07/owl#equivalentProperty 0.00
+http://www.w3.org/2002/07/owl#equivalentClass 0.00
+http://www.w3.org/2000/01/rdf-schema#Datatype 0.00
+http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty 0.00
+http://www.w3.org/2000/01/rdf-schema#Literal 0.00
+http://www.w3.org/2000/01/rdf-schema#member 0.00
+http://www.w3.org/2003/01/geo/wgs84_pos#lat 0.00
+http://www.w3.org/2003/01/geo/wgs84_pos#long 0.00
+http://www.opengis.net/ont/geosparql#asWKT 0.00
+http://www.opengis.net/ont/geosparql#asGML 0.00
+http://www.opengis.net/ont/geosparql#hasDefaultGeometry 0.00
+http://www.opengis.net/ont/geosparql#sfEquals 0.00
+http://www.opengis.net/ont/geosparql#sfDisjoint 0.00
+http://www.opengis.net/ont/geosparql#sfIntersects 0.00
+http://www.opengis.net/ont/geosparql#sfTouches 0.00
+http://www.opengis.net/ont/geosparql#sfWithin 0.00
+http://www.opengis.net/ont/geosparql#sfContains 0.00
+http://www.opengis.net/ont/geosparql#sfOverlaps 0.00
+http://www.opengis.net/ont/geosparql#sfCrosses 0.00
+http://www.opengis.net/ont/geosparql#ehEquals 0.00
+http://www.opengis.net/ont/geosparql#ehDisjoint 0.00
+http://www.opengis.net/ont/geosparql#ehMeet 0.00
+http://www.opengis.net/ont/geosparql#ehOverlap 0.00
+http://www.opengis.net/ont/geosparql#ehCovers 0.00
+http://www.opengis.net/ont/geosparql#ehCoveredBy 0.00
+http://www.opengis.net/ont/geosparql#ehInside 0.00
+http://www.opengis.net/ont/geosparql#ehContains 0.00
+http://www.opengis.net/ont/geosparql#rcc8eq 0.00
+http://www.opengis.net/ont/geosparql#rcc8dc 0.00
+http://www.opengis.net/ont/geosparql#rcc8ec 0.00
+http://www.opengis.net/ont/geosparql#rcc8po 0.00
+http://www.opengis.net/ont/geosparql#rcc8tppi 0.00
+http://www.opengis.net/ont/geosparql#rcc8tpp 0.00
+http://www.opengis.net/ont/geosparql#rcc8ntpp 0.00
+http://www.opengis.net/ont/geosparql#rcc8ntppi 0.00
+http://www.wikidata.org/prop/P17 0.00
+http://www.wikidata.org/entity/Q472 0.00
+http://www.wikidata.org/entity/Q815731 0.01
+http://www.wikidata.org/prop/qualifier/P582 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q815731 0.00
+http://www.w3.org/2001/XMLSchema#dateTime 0.00
+http://wikiba.se/ontology#timePrecision 0.00
+http://www.wikidata.org/prop/qualifier/P580 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q815731 http://www.wikidata.org/prop/qualifier/P580 "1878-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.w3.org/2001/XMLSchema#integer 0.00
+http://wikiba.se/ontology#timeTimezone 0.00
+http://www.wikidata.org/prop/P1082 0.00
+http://www.w3.org/2001/XMLSchema#decimal 0.00
+http://www.wikidata.org/prop/qualifier/P585 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 1286383.0 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 1286383.0 http://www.wikidata.org/prop/qualifier/P585 "2015-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/prop/P6 0.00
+http://www.wikidata.org/entity/Q444718 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q444718 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q444718 http://www.wikidata.org/prop/qualifier/P580 "2011-11-08T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q28517 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q28517 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q28517 http://www.wikidata.org/prop/qualifier/P582 "1949-11-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://wikiba.se/ontology#timeValue 0.00
+http://wikiba.se/ontology#timeCalendarModel 0.00
+http://www.wikidata.org/entity/Q1985727 0.96
+http://www.wikidata.org/entity/P1985727 0.33
+http://www.wikidata.org/prop/P190 0.00
+http://www.wikidata.org/entity/Q1899 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P190 http://www.wikidata.org/entity/Q1899 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P190 http://www.wikidata.org/entity/Q1899 http://www.wikidata.org/prop/qualifier/P580 "1997-09-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/prop/P901 0.00
+http://www.w3.org/2001/XMLSchema#string 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P901 BU30 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P901 BU42 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P901 BU42 http://www.wikidata.org/prop/qualifier/P580 "2000-08-10T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q4714797 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q4714797 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q4714797 http://www.wikidata.org/prop/qualifier/P580 "1990-10-17T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q57775 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q57775 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q57775 http://www.wikidata.org/prop/qualifier/P580 "2005-11-10T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q12560	0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q12560 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q12560 http://www.wikidata.org/prop/qualifier/P580 "1396-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 19000.0 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 19000.0 http://www.wikidata.org/prop/qualifier/P585 "1870-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 1202761.0 0.00
+http://www.wikidata.org/prop/qualifier/P459 0.00
+http://www.wikidata.org/entity/Q39825 0.10
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1082 1202761.0 http://www.wikidata.org/prop/qualifier/P459 http://www.wikidata.org/entity/Q39825 0.00
+http://www.wikidata.org/entity/Q713537 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q713537 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q713537 http://www.wikidata.org/prop/qualifier/P580 "1995-11-19T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q121932 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q121932 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q121932 http://www.wikidata.org/prop/qualifier/P580 "1946-09-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q444718 http://www.wikidata.org/prop/qualifier/P582 "2011-10-06T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q219 0.21
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q219 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q219 http://www.wikidata.org/prop/qualifier/P580 "1878-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q12560 http://www.wikidata.org/prop/qualifier/P582 "1878-03-02T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/P1985786 0.04
+http://www.wikidata.org/entity/Q1985786 0.04
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q57775 http://www.wikidata.org/prop/qualifier/P582 "2009-07-27T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q3805 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P190 http://www.wikidata.org/entity/Q3805 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P190 http://www.wikidata.org/entity/Q3805 http://www.wikidata.org/prop/qualifier/P580 "2000-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q444718 http://www.wikidata.org/prop/qualifier/P580 "2009-11-23T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q147909 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q147909 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q147909 http://www.wikidata.org/prop/qualifier/P582 "1946-09-14T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P6 http://www.wikidata.org/entity/Q713537 http://www.wikidata.org/prop/qualifier/P582 "2005-06-29T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P17 http://www.wikidata.org/entity/Q147909 http://www.wikidata.org/prop/qualifier/P580 "1908-10-05T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> 0.00
+http://www.wikidata.org/prop/P1343 0.00
+http://www.wikidata.org/entity/Q3181656 0.01
+http://www.wikidata.org/prop/qualifier/P1932 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1343 http://www.wikidata.org/entity/Q3181656 0.00
+http://www.wikidata.org/prop/P856 0.00
+http://www.sofia.bg/en/index_en.asp 0.01
+http://www.wikidata.org/prop/qualifier/P407 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P856 http://www.sofia.bg/en/index_en.asp 0.00
+http://www.wikidata.org/entity/Q1860 0.21
+http://www.wikidata.org/prop/P571 0.00
+http://www.wikidata.org/prop/qualifier/P1480 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P571 "-7000-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime 0.00
+http://www.wikidata.org/entity/Q5727902 0.21
+http://www.wikidata.org/entity/Q19180675 0.01
+http://www.wikidata.org/prop/qualifier/P805 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1343 http://www.wikidata.org/entity/Q19180675 0.00
+http://www.wikidata.org/entity/Q24750255 0.21
+http://www.wikidata.org/prop/P3990 0.00
+http://www.wikidata.org/prop/qualifier/P518 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P3990 SOF46-00 0.00
+http://www.wikidata.org/entity/Q4224624 0.21
+http://www.wikidata.org/prop/P421 0.00
+http://www.wikidata.org/entity/Q6723 0.01
+http://www.wikidata.org/prop/qualifier/P1264 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P421 http://www.wikidata.org/entity/Q6723 0.00
+http://www.wikidata.org/entity/Q1777301 0.21
+http://www.wikidata.org/entity/Q602358 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1343 http://www.wikidata.org/entity/Q602358 0.00
+http://www.wikidata.org/entity/Q24481434 0.21
+http://www.wikidata.org/prop/P281 0.00
+http://www.wikidata.org/prop/qualifier/P17 0.00
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P281 1000 0.00
+http://www.wikidata.org/prop/P1441>	"0.00"^^<http://www.w3.org/2001/XMLSchema#float>
+http://www.wikidata.org/entity/Q2385>	"0.01"^^<http://www.w3.org/2001/XMLSchema#float>
+http://www.wikidata.org/prop/qualifier/P2868>	"0.00"^^<http://www.w3.org/2001/XMLSchema#float>
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P1441 http://www.wikidata.org/entity/Q2385 0.00
+http://www.wikidata.org/entity/Q66827028 0.21
+http://www.wikidata.org/entity/Q6760 0.01
+http://www.wikidata.org/entity/Q472 http://www.wikidata.org/prop/P421 http://www.wikidata.org/entity/Q6760 0.00
+http://www.wikidata.org/entity/Q36669 0.21
