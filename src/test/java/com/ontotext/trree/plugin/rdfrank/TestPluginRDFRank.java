@@ -4,12 +4,15 @@ import com.ontotext.test.utils.Utils;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.Iterator;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+@RunWith(Parameterized.class)
 public class TestPluginRDFRank extends TestPluginRDFRankBase {
 
 	public TestPluginRDFRank(boolean useUpdate) {

@@ -16,7 +16,6 @@ import org.eclipse.rdf4j.sail.SailException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
@@ -27,7 +26,6 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-@RunWith(Parameterized.class)
 public class TestPluginRDFRankBase {
 	protected static final String NAMESPACE = RDFRank.NAMESPACE;
 
