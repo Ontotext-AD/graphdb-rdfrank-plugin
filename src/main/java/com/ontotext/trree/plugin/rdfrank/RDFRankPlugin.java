@@ -303,7 +303,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 			public boolean next() {
 				for (long id = subject + 1; id <= maxId; id++) {
 					Entities.Type entityType = entities.getType(id);
-					if (entityType == Entities.Type.URI || entityType == Entities.Type.BNODE) {
+					if (entityType == Entities.Type.URI || entityType == Entities.Type.BNODE || entityType == Entities.Type.TRIPLE) {
 						subject = id;
 						String rankString = getFormattedRank(subject, this.digits);
 						Literal rankLiteral = SimpleValueFactory.getInstance().createLiteral(rankString, RANK_TYPE);
