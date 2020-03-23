@@ -13,6 +13,9 @@ import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.sail.SailException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +24,7 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
+@RunWith(Parameterized.class)
 public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 	private SimpleValueFactory VF = SimpleValueFactory.getInstance();
 
