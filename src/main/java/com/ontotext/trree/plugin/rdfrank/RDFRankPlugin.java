@@ -820,7 +820,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		RDFRankProperty property = getRDFListPropertyFromId(predicate);
 		List<Long> items = configuration.getValueCollection(property)
 				.stream()
-				.map(value -> entities.put(value, Scope.SYSTEM))
+				.map(value -> entities.put(value, Scope.REQUEST))
 				.collect(Collectors.toList());
 		long[][] resultsTriples = new long[items.size()][];
 		for (int i = 0; i < items.size(); i++) {
@@ -886,7 +886,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	 * @return
 	 */
 	private Set<Long> createPredicatesList(Collection<Value> collection, Entities entities) {
-		return collection.stream().map(value -> entities.put(value, Scope.SYSTEM)).collect(Collectors.toSet());
+		return collection.stream().map(value -> entities.put(value, Scope.REQUEST)).collect(Collectors.toSet());
 	}
 
 	/**
@@ -903,7 +903,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		for (Value value : collection) {
 			result.add(specialGraphsMapping.containsKey(value)
 					? specialGraphsMapping.get(value)
-					: entities.put(value, Scope.SYSTEM));
+					: entities.put(value, Scope.REQUEST));
 		}
 		return result;
 	}
