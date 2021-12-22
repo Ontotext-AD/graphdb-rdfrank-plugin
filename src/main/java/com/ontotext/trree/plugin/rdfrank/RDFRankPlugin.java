@@ -49,7 +49,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		specialGraphsMapping.put(SimpleValueFactory.getInstance().createIRI("http://www.openrdf.org/schema/sesame#nil"), -3L);
 	}
 
-	private final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private ExecutorService executor;
 
 	private FileRankReader rankReader = null;
 
@@ -115,6 +115,8 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	}
 
 	private void initializeStandAlone() {
+		executor = Executors.newSingleThreadExecutor();
+
 		// prepare to read the ranks from binary file
 		rankReader = new FileRankReader(getStorageFile());
 		getDataDir().mkdirs();
