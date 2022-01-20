@@ -91,7 +91,7 @@ class TestRDFRankAbstract {
 		parameters.put("storage-folder", tmpFolder.getRoot().getAbsolutePath());
 		parameters.put("ruleset", "empty");
 		sail.setParameters(parameters);
-		sail.initialize();
+		sail.init();
 
 		return new SailRepository(sail);
 	}
@@ -101,7 +101,7 @@ class TestRDFRankAbstract {
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("storage-folder", tmpFolder.getRoot().getAbsolutePath());
 		sail.setParameters(parameters);
-		sail.initialize();
+		sail.init();
 
 		return new SailRepository(sail);
 	}
