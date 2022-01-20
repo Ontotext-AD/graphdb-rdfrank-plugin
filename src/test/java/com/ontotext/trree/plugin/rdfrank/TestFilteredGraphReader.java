@@ -141,7 +141,7 @@ public class TestFilteredGraphReader {
 		parameters.put("storage-folder", tmpFolder.getRoot().getAbsolutePath());
 		parameters.put("ruleset", "empty");
 		sail.setParameters(parameters);
-		sail.initialize();
+		sail.init();
 
 		return sail;
 	}
