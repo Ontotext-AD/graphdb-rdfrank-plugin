@@ -14,7 +14,6 @@ class OwlimGraphReader extends GraphReader {
 		this.statements = statements;
 		this.entities = entities;
 		this.object = object;
-		reset();
 	}
 
 	@Override
@@ -29,6 +28,7 @@ class OwlimGraphReader extends GraphReader {
 
 	@Override
 	public void reset() {
+		close();
 		iterator = statements.get(0, 0, object, 0);
 	}
 
@@ -44,6 +44,8 @@ class OwlimGraphReader extends GraphReader {
 
 	@Override
 	public void close() {
-		iterator.close();
+		if (iterator != null) {
+			iterator.close();
+		}
 	}
 }

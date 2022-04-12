@@ -572,6 +572,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 			double stableRank = .0;
 
 			try (GraphReader gr = getGraphReader(statements, entities, id)) {
+				gr.reset();
 				while (gr.next()) {
 					nLinks++;
 					if (gr.from < begId) {
