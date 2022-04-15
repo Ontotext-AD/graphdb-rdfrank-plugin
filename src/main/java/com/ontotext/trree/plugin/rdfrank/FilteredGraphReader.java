@@ -29,10 +29,6 @@ public class FilteredGraphReader extends GraphReader {
 
 	private long size = 0;
 
-	FilteredGraphReader(Statements statements, Entities entities, Set<Long> includedPredicates, Set<Long> includedGraphs, Set<Long> excludedPredicates, Set<Long> excludedGraphs, boolean includeExplicit, boolean includeImplicit) {
-		this(statements, entities, includedPredicates, includedGraphs, excludedPredicates, excludedGraphs, includeExplicit, includeImplicit, 0);
-	}
-
 	FilteredGraphReader(Statements statements, Entities entities, Set<Long> includedPredicates, Set<Long> includedGraphs, Set<Long> excludedPredicates, Set<Long> excludedGraphs, boolean includeExplicit, boolean includeImplicit, long object) {
 		this.statements = statements;
 		this.entities = entities;
@@ -43,7 +39,6 @@ public class FilteredGraphReader extends GraphReader {
 		this.includeImplicit = includeImplicit;
 		this.includeExplicit = includeExplicit;
 		this.object = object;
-		reset();
 	}
 
 	@Override
@@ -58,6 +53,7 @@ public class FilteredGraphReader extends GraphReader {
 
 	@Override
 	public void reset() {
+		close();
 		statementIterators = new LinkedList<>();
 
 		if (includedPredicates.isEmpty()) {
@@ -99,8 +95,10 @@ public class FilteredGraphReader extends GraphReader {
 
 	@Override
 	public void close() {
-		for (StatementIterator iterator : statementIterators) {
-			iterator.close();
+		if (statementIterators != null) {
+			for (StatementIterator iterator : statementIterators) {
+				iterator.close();
+			}
 		}
 	}
 
