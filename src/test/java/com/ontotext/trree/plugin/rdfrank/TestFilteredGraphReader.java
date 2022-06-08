@@ -7,6 +7,7 @@ import com.ontotext.trree.StatementIdIterator;
 import com.ontotext.trree.big.AVLRepositoryConnection;
 import com.ontotext.trree.sdk.Entities;
 import com.ontotext.trree.sdk.Statements;
+import com.ontotext.trree.sdk.impl.DummyPluginRepository;
 import com.ontotext.trree.sdk.impl.PluginManager;
 import com.ontotext.trree.sdk.impl.StatementsImpl;
 import com.ontotext.trree.transactions.TransactionException;
@@ -131,6 +132,7 @@ public class TestFilteredGraphReader {
 	private void createTestData() {
 		try {
 			conn.beginTransaction();
+			owlimSchemaRepository.getPluginManager().setCommitingConnection(conn, DummyPluginRepository.NO_OP_INSTANCE, 1);
 			owlimSchemaRepository.transactionStarted(1);
 
 			conn.putStatement(1, 1, 1, 0, StatementIdIterator.EXPLICIT_STATEMENT_STATUS);
