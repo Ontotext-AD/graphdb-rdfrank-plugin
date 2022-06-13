@@ -239,7 +239,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		}
 		// For async computation
 		if (Utils.match(predicate, computeAsyncID)) {
-			if (pluginConnection.isWorkerAttached()) {
+			if (pluginConnection.isInCluster()) {
 				// Should let user be aware that asynchronous computations are not allowed in cluster mode
 				getLogger().warn("Asynchronous computation is not allowed in cluster mode. Computing RDF rank synchronously");
 				recomputeRankSync(pluginConnection);
@@ -249,7 +249,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 			return true;
 		}
 		if (Utils.match(predicate, computeIncrementalAsyncID)) {
-			if (pluginConnection.isWorkerAttached()) {
+			if (pluginConnection.isInCluster()) {
 				getLogger().warn("Asynchronous incremental computation is not allowed in cluster mode. Computing RDF rank synchronously");
 				recomputeIncrementalRankSync(pluginConnection);
 				return true;
