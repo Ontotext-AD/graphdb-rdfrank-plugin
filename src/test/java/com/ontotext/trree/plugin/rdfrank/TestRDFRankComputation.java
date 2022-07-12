@@ -1,5 +1,10 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.graphdb.Config;
+import com.ontotext.test.TemporaryLocalFolder;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -14,6 +19,9 @@ public abstract class TestRDFRankComputation extends TestRDFRankAbstract {
 
 	private boolean filterEnabled;
 
+	@ClassRule
+	public static TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
+
 	public TestRDFRankComputation(boolean filterEnabled) {
 		this.filterEnabled = filterEnabled;
 	}
@@ -21,6 +29,18 @@ public abstract class TestRDFRankComputation extends TestRDFRankAbstract {
 	@Parameterized.Parameters
 	public static List<Object[]> getParameters() {
 		return Arrays.<Object[]> asList(new Object[] { true }, new Object[] { false });
+	}
+
+	@BeforeClass
+	public static void setWorkDir() {
+		System.setProperty("graphdb.home.work", String.valueOf(tmpFolder.getRoot()));
+		Config.reset();
+	}
+
+	@AfterClass
+	public static void resetWorkDir() {
+		System.clearProperty("graphdb.home.work");
+		Config.reset();
 	}
 
 	@Test
