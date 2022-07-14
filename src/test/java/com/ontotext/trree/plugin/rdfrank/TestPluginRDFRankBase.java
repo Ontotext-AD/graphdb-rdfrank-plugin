@@ -1,5 +1,6 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.graphdb.Config;
 import com.ontotext.test.TemporaryLocalFolder;
 import com.ontotext.test.utils.Utils;
 import com.ontotext.trree.OwlimSchemaRepository;
@@ -13,9 +14,7 @@ import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.sail.SailConnection;
 import org.eclipse.rdf4j.sail.SailException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.*;
 import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
@@ -39,8 +38,8 @@ public class TestPluginRDFRankBase {
 
 	protected boolean useUpdate;
 
-	@Rule
-	public TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
+	@ClassRule
+	public static TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
 
 	public TestPluginRDFRankBase(boolean useUpdate) {
 		this.useUpdate = useUpdate;
@@ -49,6 +48,18 @@ public class TestPluginRDFRankBase {
 	@Parameterized.Parameters
 	public static List<Object[]> getParameters() {
 		return Arrays.<Object[]> asList(new Object[] { true }, new Object[] { false });
+	}
+
+	@BeforeClass
+	public static void setWorkDir() {
+		System.setProperty("graphdb.home.work", String.valueOf(tmpFolder.getRoot()));
+		Config.reset();
+	}
+
+	@AfterClass
+	public static void resetWorkDir() {
+		System.clearProperty("graphdb.home.work");
+		Config.reset();
 	}
 
 	@Before

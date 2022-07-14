@@ -1,5 +1,6 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.graphdb.Config;
 import com.ontotext.test.TemporaryLocalFolder;
 import com.ontotext.trree.OwlimConnection;
 import com.ontotext.trree.OwlimSchemaRepository;
@@ -11,10 +12,7 @@ import com.ontotext.trree.sdk.impl.DummyPluginRepository;
 import com.ontotext.trree.sdk.impl.PluginManager;
 import com.ontotext.trree.sdk.impl.StatementsImpl;
 import com.ontotext.trree.transactions.TransactionException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mockito;
 
 import java.util.*;
@@ -25,14 +23,25 @@ public class TestFilteredGraphReader {
 
 	private static final Set<Long> EMPTY = new HashSet<>(0);
 
+	@ClassRule
+	public static TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
 
 	private OwlimSchemaRepository owlimSchemaRepository;
 	private OwlimConnection owlimConnection;
 	private AVLRepositoryConnection conn;
 	private GraphReader graphReader;
 
-	@Rule
-	public TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
+	@BeforeClass
+	public static void setWorkDir() {
+		System.setProperty("graphdb.home.work", String.valueOf(tmpFolder.getRoot()));
+		Config.reset();
+	}
+
+	@AfterClass
+	public static void resetWorkDir() {
+		System.clearProperty("graphdb.home.work");
+		Config.reset();
+	}
 
 	@Before
 	public void setup() {
@@ -122,7 +131,7 @@ public class TestFilteredGraphReader {
 		graphReader = createFilteredGraphReader(new StatementsImpl(Mockito.mock(PluginManager.class), conn), null, getSet(1l), getSet(1l), EMPTY, EMPTY, true, true, 0);
 		expect();
 	}
-	
+
 	private GraphReader createFilteredGraphReader(Statements statements, Entities entities, Set<Long> includedPredicates, Set<Long> includedGraphs, Set<Long> excludedPredicates, Set<Long> excludedGraphs, boolean includeExplicit, boolean includeImplicit, long object) {
 		FilteredGraphReader graphReader = new FilteredGraphReader(statements, entities, includedPredicates, includedGraphs, excludedPredicates, excludedGraphs, includeExplicit, includeImplicit, object);
 		graphReader.reset();

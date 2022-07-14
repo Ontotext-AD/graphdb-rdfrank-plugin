@@ -4,17 +4,29 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import com.ontotext.graphdb.Config;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.repository.sail.SailRepositoryConnection;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 
 import com.ontotext.test.TemporaryLocalFolder;
 import com.ontotext.trree.OwlimSchemaRepository;
 
 public class TestRDFRankPluginInitialization {
-	@Rule
-	public TemporaryLocalFolder tmp = new TemporaryLocalFolder();
+	@ClassRule
+	public static TemporaryLocalFolder tmp = new TemporaryLocalFolder();
+
+	@BeforeClass
+	public static void setWorkDir() {
+		System.setProperty("graphdb.home.work", String.valueOf(tmp.getRoot()));
+		Config.reset();
+	}
+
+	@AfterClass
+	public static void resetWorkDir() {
+		System.clearProperty("graphdb.home.work");
+		Config.reset();
+	}
 
 	@Test
 	public void testPluginInitFromPartialStorage() throws IOException {
@@ -24,18 +36,18 @@ public class TestRDFRankPluginInitialization {
 		initCreateRankShutdown(folder, dataUpdate);
 		// now, remove / corrupt the index
 		for (File f : new File(folder, "storage").listFiles()) {
-			if (!f.isDirectory() || !"rdfrank".equals(f.getName())) 
+			if (!f.isDirectory() || !"rdfrank".equals(f.getName()))
 				continue;
 			// delete ...
 			for (File ixd : f.listFiles()) {
 				if (ixd.isFile() && ixd.getName().endsWith("index")) {
 					System.out.println("truncate "+ixd.getName());
 					RandomAccessFile raf = new RandomAccessFile(ixd, "rw");
-					// truncate but not set it empty 
+					// truncate but not set it empty
 					raf.setLength(4);
 					raf.close();
 				}
-					
+
 			}
 		}
 		// check if it fail - if not fixed 1103 it throws here
@@ -46,7 +58,7 @@ public class TestRDFRankPluginInitialization {
 		 */
 		initCreateRankShutdown(folder, null);
 	}
-	
+
 	private void initCreateRankShutdown(File folder, String dataUpdate) {
 		OwlimSchemaRepository sail = new OwlimSchemaRepository();
 		SailRepository rep = new SailRepository(sail);
