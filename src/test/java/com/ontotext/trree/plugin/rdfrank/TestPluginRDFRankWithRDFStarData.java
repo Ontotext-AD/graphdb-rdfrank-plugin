@@ -1,5 +1,7 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.graphdb.Config;
+import com.ontotext.test.TemporaryLocalFolder;
 import com.ontotext.test.utils.Utils;
 import com.ontotext.trree.entitypool.EntityPoolConnection;
 import com.ontotext.trree.entitypool.EntityType;
@@ -11,8 +13,7 @@ import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.sail.SailException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -26,10 +27,25 @@ import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
+	@ClassRule
+	public static TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
+
 	private SimpleValueFactory VF = SimpleValueFactory.getInstance();
 
 	public TestPluginRDFRankWithRDFStarData(boolean useUpdate) {
 		super(useUpdate);
+	}
+
+	@BeforeClass
+	public static void setWorkDir() {
+		System.setProperty("graphdb.home.work", String.valueOf(tmpFolder.getRoot()));
+		Config.reset();
+	}
+
+	@AfterClass
+	public static void resetWorkDir() {
+		System.clearProperty("graphdb.home.work");
+		Config.reset();
 	}
 
 	@Before
