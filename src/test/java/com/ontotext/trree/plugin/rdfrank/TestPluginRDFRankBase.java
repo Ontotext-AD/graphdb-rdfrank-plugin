@@ -1,6 +1,5 @@
 package com.ontotext.trree.plugin.rdfrank;
 
-import com.ontotext.graphdb.Config;
 import com.ontotext.test.TemporaryLocalFolder;
 import com.ontotext.test.utils.Utils;
 import com.ontotext.trree.OwlimSchemaRepository;
@@ -29,7 +28,7 @@ public class TestPluginRDFRankBase {
 	protected static final String NAMESPACE = RDFRank.NAMESPACE;
 
 	protected static final int DEFAULT_ITERATIONS = 10;
-	protected static final double DEFAULT_EPSILON = 0;
+	protected static final float DEFAULT_EPSILON = 0;
 
 	protected SailRepository repository;
 	protected SailConnection sailConn;
@@ -123,7 +122,7 @@ public class TestPluginRDFRankBase {
 		}
 	}
 
-	protected void recomputeRank(double epsilon, int iteratrions) {
+	protected void recomputeRank(float epsilon, int iteratrions) {
 		assertTrue(exec("{<" + RDFRank.EPSILON + "> <" + RDFRank.SET_PARAM + "> \"" + epsilon + "\"}"));
 		assertTrue(exec("{<" + RDFRank.MAX_ITERATIONS + "> <" + RDFRank.SET_PARAM + "> \"" + iteratrions
 				+ "\"}"));

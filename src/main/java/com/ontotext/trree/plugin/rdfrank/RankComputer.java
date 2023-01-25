@@ -1,19 +1,18 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.trree.util.BigFloatArray;
 import java.io.File;
 
 import com.ontotext.trree.sdk.PluginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ontotext.trree.util.BigDoubleArray;
-
 class RankComputer {
 	private long limitStatements = Long.MAX_VALUE;
 	private long totalIterations = 10;
-	private double dampingFactor = 0.85;
-	private double epsilon = 0;
-	private double minRank, maxRank;
+	private float dampingFactor = 0.85f;
+	private float epsilon = 0f;
+	private float minRank, maxRank;
 	private File dataDir = null;
 	private int entityBitSize = 32;
 	private boolean interrupt = false;
@@ -24,15 +23,15 @@ class RankComputer {
 		return dampingFactor;
 	}
 
-	void setDampingFactor(double d) {
+	void setDampingFactor(float d) {
 		dampingFactor = d;
 	}
 
-	double getEpsilon() {
+	float getEpsilon() {
 		return epsilon;
 	}
 
-	void setEpsilon(double e) {
+	void setEpsilon(float e) {
 		epsilon = e;
 	}
 
@@ -64,7 +63,7 @@ class RankComputer {
 		dataDir = dir;
 	}
 
-	BigDoubleArray compute(GraphReader gr) {
+	BigFloatArray compute(GraphReader gr) {
 		// create a table storage to handle the graph data
 		long dim = gr.nodeCount() + 1;
 		if (getDataDir() == null) {
@@ -78,7 +77,7 @@ class RankComputer {
 		long count = 0;
 		for (gr.reset(); gr.next();) {
 			if (++count % 1000000 == 0) {
-				Logger.info("Adding " + count + " of " + gr.size());
+				Logger.info("Adding {} of {}", count, gr.size());
 			}
 			storage.add(gr.getFrom(), gr.getTo());
 			if (interrupt) {
@@ -100,26 +99,26 @@ class RankComputer {
 
 		long size = gr.nodeCount() + 1;
 
-		BigDoubleArray prevRank = new BigDoubleArray(size);
-		BigDoubleArray currRank = new BigDoubleArray(size);
+		BigFloatArray prevRank = new BigFloatArray(size);
+		BigFloatArray currRank = new BigFloatArray(size);
 
-		double resetProbability = (1d - dampingFactor) / size;
+		float resetProbability = ((1f - dampingFactor) / size);
 
 		// initialize the process with the value of 1/N
-		currRank.fill(1d / size);
+		currRank.fill(1f / size);
 
 		// start RDF Rank iterations
 		for (int iter = 0; iter < totalIterations; iter++) {
-			minRank = 1.0;
+			minRank = 1.0f;
 			maxRank = 0;
 
-			double totalRank = 0;
-			double danglingRank = 0;
+			float totalRank = 0;
+			float danglingRank = 0;
 
-			Logger.info("Executing iteration #" + iter);
+			Logger.info("Executing iteration #{}", iter);
 
 			// swap current and previous rank arrays
-			BigDoubleArray tempRank = currRank;
+			BigFloatArray tempRank = currRank;
 			currRank = prevRank;
 			prevRank = tempRank;
 			// clear the contents of the next-to-fill RDF Rank array
@@ -135,7 +134,7 @@ class RankComputer {
 					danglingRank += prevRank.get(idx);
 				} else {
 					// rank is dispatched across the outgoing links
-					double rankEmission = prevRank.get(idx) / outgoing;
+					float rankEmission = prevRank.get(idx) / outgoing;
 					while (rowIterator.hasNext()) {
 						long index = rowIterator.next();
 						currRank.set(index, currRank.get(index) + rankEmission);
@@ -146,7 +145,7 @@ class RankComputer {
 			danglingRank /= size;
 			// add up dangling rank, apply damping factor and add reset probability
 			for (int idx = 0; idx < size; idx++) {
-				double value = currRank.get(idx);
+				float value = currRank.get(idx);
 				value += danglingRank;
 				value *= dampingFactor;
 				value += resetProbability;
@@ -159,7 +158,7 @@ class RankComputer {
 				if (currRank.get(idx) < 0) {
 					Logger.error("Negative rank detected!");
 				}
-				double normalized = currRank.get(idx) / totalRank;
+				float normalized = currRank.get(idx) / totalRank;
 				if (normalized < minRank) {
 					minRank = normalized;
 				} else if (normalized > maxRank) {
@@ -168,19 +167,19 @@ class RankComputer {
 				currRank.set(idx, normalized);
 			}
 			// compute accumulated difference with the previous rank
-			double delta = 0;
+			float delta = 0;
 			for (int idx = 0; idx < size; idx++) {
 				if (currRank.get(idx) < 0) {
 					continue;
 				}
-				double diff = currRank.get(idx) - prevRank.get(idx);
+				float diff = currRank.get(idx) - prevRank.get(idx);
 				if (diff < 0) {
 					delta -= diff;
 				} else {
 					delta += diff;
 				}
 			}
-			Logger.debug("Iteration #" + iter + " is different by " + RankUtils.format(delta));
+			Logger.debug("Iteration #{} is different by {}", iter, RankUtils.format(delta));
 
 			if (delta <= epsilon) {
 				break;
@@ -193,7 +192,7 @@ class RankComputer {
 		}
 
 		long t2 = System.currentTimeMillis();
-		Logger.info("Finished computing RDF Rank in " + ((t2 - t1) / 1000) + "s.");
+		Logger.info("Finished computing RDF Rank in {}s.", ((t2 - t1) / 1000));
 
 		// remove graph storage (won't be needed any more)
 		storage.shutDown();
