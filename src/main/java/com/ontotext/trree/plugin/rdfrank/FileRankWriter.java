@@ -1,12 +1,12 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.trree.util.BigFloatArray;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.ontotext.trree.util.BigDoubleArray;
 import com.ontotext.trree.util.FileUtils;
 
 /**
@@ -25,7 +25,7 @@ class FileRankWriter {
 	 * @param ranks
 	 *            array of ranks
 	 */
-	void write(BigDoubleArray ranks) {
+	void write(BigFloatArray ranks) {
 		DataOutputStream dos = null;
 		try {
 			dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File(rankFile))));

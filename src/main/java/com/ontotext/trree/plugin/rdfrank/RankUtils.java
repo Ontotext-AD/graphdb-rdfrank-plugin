@@ -1,11 +1,11 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.trree.util.BigFloatArray;
 import java.util.LinkedList;
 import java.util.Locale;
 
 import com.ontotext.GraphDBInternalConfigParameters;
 import com.ontotext.config.ParametersSource;
-import com.ontotext.trree.util.BigDoubleArray;
 
 /**
  * Utility methods used by the rank-computing routines
@@ -52,9 +52,9 @@ class RankUtils {
 	 *            the minimum factor between thresholds
 	 * @return array of thresholds
 	 */
-	static double[] computeThresholds(BigDoubleArray ranks, int precision) {
+	static double[] computeThresholds(BigFloatArray ranks, int precision) {
 		// create a sorted copy of the ranks array
-		BigDoubleArray sorted = ranks.clone();
+		BigFloatArray sorted = ranks.clone();
 		sorted.sort();
 
 		int idx = 0;
@@ -101,12 +101,12 @@ class RankUtils {
 	}
 
 	/**
-	 * Format a double number
+	 * Format a float number
 	 * 
 	 * @param number
 	 * @return formatted string
 	 */
-	static String format(double number) {
+	static String format(float number) {
 		return String.format(FORMAT_LOCALE, FORMAT_STRING, number);
 	}
 	

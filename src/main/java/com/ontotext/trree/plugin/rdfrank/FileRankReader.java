@@ -48,7 +48,7 @@ class FileRankReader {
 		// read storage file header
 		DataInputStream stream;
 		try {
-			stream = new DataInputStream(new FileInputStream(new File(file)));
+			stream = new DataInputStream(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			return;
 		}
@@ -123,13 +123,14 @@ class FileRankReader {
 		synchronized (page) {
 			if (!page.isInitialized) {
 				// read the page contents from disk
-				FileInputStream fis = new FileInputStream(file);
-				fis.getChannel().position(headerSize + ((long) pageIndex) * PAGE_SIZE * SIZE_OF_RECORD);
-				try (DataInputStream in = new DataInputStream(new BufferedInputStream(fis))) {
-					long numberOfRanksInPage = Math.min(page.ranks.length, size - (long) pageIndex * PAGE_SIZE);
-					for (int idx = 0; idx < numberOfRanksInPage; idx++) {
-						in.readInt(); // the node ID is stored but not currently used
-						page.ranks[idx] = in.readDouble();
+				try (FileInputStream fis = new FileInputStream(file)) {
+					fis.getChannel().position(headerSize + ((long) pageIndex) * PAGE_SIZE * SIZE_OF_RECORD);
+					try (DataInputStream in = new DataInputStream(new BufferedInputStream(fis))) {
+						long numberOfRanksInPage = Math.min(page.ranks.length, size - (long) pageIndex * PAGE_SIZE);
+						for (int idx = 0; idx < numberOfRanksInPage; idx++) {
+							in.readInt(); // the node ID is stored but not currently used
+							page.ranks[idx] = in.readDouble();
+						}
 					}
 				}
 				// mark the page as initialized

@@ -1,5 +1,6 @@
 package com.ontotext.trree.plugin.rdfrank;
 
+import com.ontotext.trree.util.BigFloatArray;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -22,7 +23,6 @@ import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
 import com.ontotext.trree.sdk.Entities.Scope;
-import com.ontotext.trree.util.BigDoubleArray;
 import com.ontotext.trree.plugin.rdfrank.Configuration.RDFRankProperty;
 
 import static com.ontotext.trree.plugin.rdfrank.RDFRankPlugin.Status.*;
@@ -38,7 +38,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	private static final String STATE_FILE = "state";
 	private static final String TEMP_SUFFIX = ".temp";
 
-	private static final double DEFAULT_EPSILON = 0.01;
+	private static final float DEFAULT_EPSILON = 0.01f;
 	private static final int DEFAULT_MAX_ITERATIONS = 20;
 
 	private static final IRI RANK_TYPE = SimpleValueFactory.getInstance().createIRI("http://www.w3.org/2001/XMLSchema#float");
@@ -66,7 +66,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	private long contextId = 0;
 
 	private int maxIterations = DEFAULT_MAX_ITERATIONS;
-	private double epsilon = DEFAULT_EPSILON;
+	private float epsilon = DEFAULT_EPSILON;
 
 	private RankComputer computer = null;
 
@@ -363,11 +363,11 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		maxIterations = value;
 	}
 
-	private double getEpsilon() {
+	private float getEpsilon() {
 		return epsilon;
 	}
 
-	private void setEpsilon(double value) {
+	private void setEpsilon(float value) {
 		epsilon = value;
 	}
 
@@ -428,13 +428,13 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	}
 
 	private void recomputeRank(Statements statements, Entities entities) {
-		getLogger().info("Computing RDF rank with epsilon=" + epsilon + " max-iterations=" + maxIterations);
+		getLogger().info("Computing RDF rank with epsilon={} max-iterations={}", epsilon, maxIterations);
 
 		// create our plugin directory
 		getDataDir().mkdirs();
 
 		// prepare for reading of the whole repository
-		BigDoubleArray ranks;
+		BigFloatArray ranks;
 		try (GraphReader reader = getGraphReader(statements, entities)) {
 			// load the graph and compute ranks
 			computer = new RankComputer();
@@ -558,7 +558,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		}
 
 
-		getLogger().info(String.format("Begin parsing of %d entities", endId - begId));
+		getLogger().info("Begin parsing of {} entities", (endId - begId));
 		// loop over nodes [begId, endId) to count:
 		// - nInboundLinks
 		// - nStableInboundLinks
@@ -777,7 +777,6 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	/**
 	 * Creates a {@link FilteredGraphReader} instance using the properties in the configuration object
 	 *
-	 * @param statements
 	 * @param entities
 	 * @param object 0 for wildcard
 	 * @return
@@ -851,7 +850,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		Value value = entities.get(valueId);
 
 		if (collection.contains(value)) {
-			getLogger().info(String.format("Value %s already present in the list %s", value.stringValue(), property.toString()));
+			getLogger().info("Value {} already present in the list {}", value.stringValue(), property.toString());
 			return;
 		}
 
