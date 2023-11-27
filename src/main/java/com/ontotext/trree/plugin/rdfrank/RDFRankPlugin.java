@@ -12,8 +12,10 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import com.ontotext.trree.sdk.*;
@@ -162,7 +164,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 			}
 
 			long statusRequestEntity = pluginConnection.getEntities().put(SimpleValueFactory.getInstance()
-														.createLiteral(statusString), Entities.Scope.REQUEST);
+					.createLiteral(statusString), Entities.Scope.REQUEST);
 			return StatementIterator.create(subject, predicate, statusRequestEntity, context);
 		}
 		// present query. Basically checks that the plugin is initialized
@@ -194,7 +196,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 
 	@Override
 	public boolean interpretUpdate(long subject, long predicate, long object, long context, boolean isAddition,
-			boolean isExplicit, PluginConnection pluginConnection) {
+								   boolean isExplicit, PluginConnection pluginConnection) {
 		interpretOperations(subject, predicate, object, pluginConnection);
 		return true;
 	}
@@ -404,27 +406,32 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	 * @throws PluginException in case of a {@link RuntimeException} while computing
 	 */
 	private synchronized void recomputeRankAsync(PluginConnection pluginConnection) {
-		if (computationInProgress) {
-			getLogger().info("Computing RDFRank already in progress");
-			return;
-		}
-
-		ThreadsafePluginConnecton threadsafePluginConnecton = pluginConnection.getThreadsafeConnection();
-		Statements threadSafeStatements = threadsafePluginConnecton.getStatements();
-		Entities threadSafeEntities = threadsafePluginConnecton.getEntities();
-
-		executor.submit(() -> {
-			startComputation();
-			try {
-				recomputeRank(threadSafeStatements, threadSafeEntities);
-			} catch (Throwable t) {
-				error = t;
-				fail(t.getMessage());
-			} finally {
-				threadsafePluginConnecton.close();
-				computationInProgress = false;
+		try {
+			if (computationInProgress) {
+				getLogger().info("Computing RDFRank already in progress");
+				return;
 			}
-		});
+
+			ThreadsafePluginConnecton threadsafePluginConnecton = pluginConnection.getThreadsafeConnection();
+			Statements threadSafeStatements = threadsafePluginConnecton.getStatements();
+			Entities threadSafeEntities = threadsafePluginConnecton.getEntities();
+
+			Future<?> future = executor.submit(() -> {
+				startComputation();
+				try {
+					recomputeRank(threadSafeStatements, threadSafeEntities);
+				} catch (Throwable t) {
+					error = t;
+					fail(t.getMessage());
+				} finally {
+					threadsafePluginConnecton.close();
+					computationInProgress = false;
+				}
+			});
+			future.get();
+		} catch (ExecutionException | InterruptedException e) {
+			throw new RuntimeException("Interrupted RDF rank computation." + e);
+		}
 	}
 
 	private void recomputeRank(Statements statements, Entities entities) {
@@ -490,27 +497,32 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	 * @throws PluginException in case of a {@link RuntimeException} while computing
 	 */
 	private synchronized void recomputeIncrementalRankAsync(PluginConnection pluginConnection) {
-		if (computationInProgress) {
-			getLogger().info("Computing RDFRank already in progress");
-			return;
-		}
-
-		ThreadsafePluginConnecton threadsafePluginConnecton = pluginConnection.getThreadsafeConnection();
-		Statements threadSafeStatements = threadsafePluginConnecton.getStatements();
-		Entities threadSafeEntities = threadsafePluginConnecton.getEntities();
-
-		executor.submit(() -> {
-			startComputation();
-			try {
-				recomputeIncrementalRank(threadSafeStatements, threadSafeEntities);
-			} catch (Throwable t) {
-				error = t;
-				fail(t.getMessage());
-			} finally {
-				threadsafePluginConnecton.close();
-				computationInProgress = false;
+		try {
+			if (computationInProgress) {
+				getLogger().info("Computing RDFRank already in progress");
+				return;
 			}
-		});
+
+			ThreadsafePluginConnecton threadsafePluginConnecton = pluginConnection.getThreadsafeConnection();
+			Statements threadSafeStatements = threadsafePluginConnecton.getStatements();
+			Entities threadSafeEntities = threadsafePluginConnecton.getEntities();
+
+			Future<?> future = executor.submit(() -> {
+				startComputation();
+				try {
+					recomputeIncrementalRank(threadSafeStatements, threadSafeEntities);
+				} catch (Throwable t) {
+					error = t;
+					fail(t.getMessage());
+				} finally {
+					threadsafePluginConnecton.close();
+					computationInProgress = false;
+				}
+			});
+			future.get();
+		} catch (ExecutionException | InterruptedException e) {
+			throw new RuntimeException("Interrupted RDF rank computation." + e);
+		}
 	}
 
 	/**
@@ -814,7 +826,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 	 *         <li><b>context</b> - default</li>
 	 *     </ul>
 	 *
- 	 * @param predicate the id of the filter list
+	 * @param predicate the id of the filter list
 	 * @param entities
 	 * @return StatementIterator of the list
 	 */
