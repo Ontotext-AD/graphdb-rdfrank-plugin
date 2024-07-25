@@ -289,7 +289,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 		final long maxId = subjectPattern == 0 ? entities.size() : subjectPattern;
 
 		return new StatementIterator() {
-			int digits = 2;
+			int digits = 5;
 			{
 				subject = minId - 1;
 				predicate = predicatePattern;

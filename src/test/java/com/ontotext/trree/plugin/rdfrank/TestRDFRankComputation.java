@@ -56,7 +56,7 @@ public abstract class TestRDFRankComputation extends TestRDFRankAbstract {
 
 		assertEquals(0.0, getRank(valuesPool.get(0)), 0.001);
 		assertEquals(0.0, getRank(valuesPool.get(1)), 0.001);
-		assertEquals(0.33, getRank(valuesPool.get(2)), 0.001);
+		assertEquals(0.33333, getRank(valuesPool.get(2)), 0.001);
 		assertEquals(1.0, getRank(valuesPool.get(3)), 0.001);
 
 	}
