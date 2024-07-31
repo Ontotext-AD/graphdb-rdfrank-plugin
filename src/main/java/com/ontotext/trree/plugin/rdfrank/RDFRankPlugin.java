@@ -297,9 +297,7 @@ public class RDFRankPlugin extends PluginBase implements PatternInterpreter, Upd
 					digits = 3;
 				else if (predicatePattern == hasRDFRankID_4)
 					digits = 4;
-				else if (predicatePattern == hasRDFRankID_5)
-					digits = 5;
-			}
+            }
 
 			@Override
 			public boolean next() {
