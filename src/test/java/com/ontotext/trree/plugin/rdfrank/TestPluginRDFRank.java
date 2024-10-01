@@ -62,9 +62,9 @@ public class TestPluginRDFRank extends TestPluginRDFRankBase {
 		while (iter.hasNext()) {
 			BindingSet bs = iter.next();
 			if (bs.getValue("o").stringValue().equals("http://www.ontotext.com/owlim/rdfrank/test#b")) {
-				assertTrue(bs.getValue("r").stringValue().equals("0.26"));
+				assertTrue(bs.getValue("r").stringValue().equals("0.25974"));
 			} else if (bs.getValue("o").stringValue().equals("http://www.ontotext.com/owlim/rdfrank/test#c")) {
-				assertTrue(bs.getValue("r").stringValue().equals("1.00"));
+				assertTrue(bs.getValue("r").stringValue().equals("1.00000"));
 			} else {
 				fail("Unexpected binding: " + bs.getValue("o"));
 			}
