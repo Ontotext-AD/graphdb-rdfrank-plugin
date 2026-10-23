@@ -51,7 +51,7 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 	@Before
 	public void setUp() throws RepositoryException, SailException {
 		super.setUp();
-		load("TestPluginRDFRankRDFStarData.ttls");
+		load("TestPluginRDFRankRDFStarData.ttl");
 	}
 
 	protected void check(String fileName) {
@@ -73,7 +73,7 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 							break;
 						}
 						case 4: {
-							ranks.put(VF.createTriple(VF.createIRI(parts[0]), VF.createIRI(parts[1]), VF.createIRI(parts[2])), parts[3]);
+							ranks.put(VF.createTripleTerm(VF.createIRI(parts[0]), VF.createIRI(parts[1]), VF.createIRI(parts[2])), parts[3]);
 							// Note that entities that are part of embedded triple are also in the entity pool
 							// And because they are part just of the embedded triple have rank 0.0
 							ranks.put(VF.createIRI(parts[0]), "0.00000");
@@ -99,8 +99,8 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 						continue; // can't query about blank nodes
 					}
 					String queryVar;
-					if (uri instanceof Triple) {
-						queryVar = "<<<" + ((Triple) uri).getSubject() + "> <" + ((Triple) uri).getPredicate() + "> <" + ((Triple) uri).getObject() + ">>>";
+					if (uri instanceof TripleTerm) {
+						queryVar = "<<( <" + ((TripleTerm) uri).getSubject() + "> <" + ((TripleTerm) uri).getPredicate() + "> <" + ((TripleTerm) uri).getObject() + "> )>>";
 					} else {
 						queryVar = "<" + uri.stringValue() + ">";
 					}
@@ -137,9 +137,10 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 							continue;
 						}
 						Value rankValue = bs.getValue("r");
-						assertTrue(uriValue instanceof Resource);
+						// In RDF 1.2 a triple term is not a Resource (it can only be in object position)
+						assertTrue(uriValue instanceof Resource || uriValue instanceof TripleTerm);
 						assertTrue(rankValue instanceof Literal);
-						assertEquals(((uriValue instanceof Triple ? "TRIPLE = " : "URI = ") + uriValue.stringValue()),
+						assertEquals(((uriValue instanceof TripleTerm ? "TRIPLE = " : "URI = ") + uriValue.stringValue()),
 								ranks.get(uriValue), rankValue.stringValue());
 					}
 				}
@@ -172,18 +173,22 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 		Iterator<BindingSet> iter = Utils.evaluateQuery(sailConn,
 				"PREFIX ns: <http://www.ontotext.com/owlim/rdfrank/test#> "
 						+ "PREFIX rank: <http://www.ontotext.com/owlim/RDFRank#> "
-						+ "SELECT ?o ?r WHERE {<<ns:a <urn:1> <urn:2>>> ?p ?o . ?o rank:hasRDFRank ?r}", QueryLanguage.SPARQL,
+						+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+						+ "SELECT ?o ?r WHERE {<< ns:a <urn:1> <urn:2> >> ns:p ?reifier . ?reifier rdf:reifies ?o . ?o rank:hasRDFRank ?r}", QueryLanguage.SPARQL,
 				true);
+		int count = 0;
 		while (iter.hasNext()) {
 			BindingSet bs = iter.next();
-			if (bs.getValue("o").stringValue().equals("<<http://www.ontotext.com/owlim/rdfrank/test#b urn:5 urn:8>>")) {
-				assertTrue(bs.getValue("r").stringValue().equals("0.25974"));
-			} else if (bs.getValue("o").stringValue().equals("<<http://www.ontotext.com/owlim/rdfrank/test#c urn:10 urn:15>>")) {
-				assertTrue(bs.getValue("r").stringValue().equals("1.00000"));
+			count++;
+			if (bs.getValue("o").stringValue().equals("<<( http://www.ontotext.com/owlim/rdfrank/test#b urn:5 urn:8 )>>")) {
+				assertEquals("0.35088", bs.getValue("r").stringValue());
+			} else if (bs.getValue("o").stringValue().equals("<<( http://www.ontotext.com/owlim/rdfrank/test#c urn:10 urn:15 )>>")) {
+				assertEquals("1.00000", bs.getValue("r").stringValue());
 			} else {
 				fail("Unexpected binding: " + bs.getValue("o"));
 			}
 		}
+		assertEquals(2, count);
 	}
 
 	@Test

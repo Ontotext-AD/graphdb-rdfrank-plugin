@@ -15,7 +15,11 @@ http://www.w3.org/2000/01/rdf-schema#Datatype 0.00000
 http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty 0.00000
 http://www.w3.org/2000/01/rdf-schema#Literal 0.00000
 http://www.w3.org/2000/01/rdf-schema#member 0.00000
-http://www.ontotext.com/owlim/rdfrank/test#a urn:1 urn:2 0.00000
+http://www.ontotext.com/owlim/rdfrank/test#a urn:1 urn:2 0.18227
 http://www.ontotext.com/owlim/rdfrank/test#p 0.00000
-http://www.ontotext.com/owlim/rdfrank/test#b urn:5 urn:8 0.25974
+http://www.ontotext.com/owlim/rdfrank/test#b urn:5 urn:8 0.35088
 http://www.ontotext.com/owlim/rdfrank/test#c urn:10 urn:15 1.00000
+http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies 0.00000
+http://www.ontotext.com/owlim/rdfrank/test#ra 0.00000
+http://www.ontotext.com/owlim/rdfrank/test#rb 0.18227
+http://www.ontotext.com/owlim/rdfrank/test#rc 0.53315

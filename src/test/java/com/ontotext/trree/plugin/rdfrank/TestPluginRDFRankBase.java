@@ -86,8 +86,8 @@ public class TestPluginRDFRankBase {
 			if (fileName.endsWith(".nt") || fileName.endsWith(".n3")) {
 				format = RDFFormat.N3;
 			}
-			if (fileName.endsWith(".ttls")) {
-				format = RDFFormat.TURTLESTAR;
+			if (fileName.endsWith(".ttl")) {
+				format = RDFFormat.TURTLE;
 			}
 			connection.add(TestPluginRDFRank.class.getResourceAsStream("/" + fileName), NAMESPACE, format);
 			connection.commit();
