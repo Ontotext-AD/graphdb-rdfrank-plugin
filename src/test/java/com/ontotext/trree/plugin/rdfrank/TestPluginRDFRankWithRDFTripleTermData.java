@@ -26,13 +26,13 @@ import java.util.Iterator;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
+public class TestPluginRDFRankWithRDFTripleTermData extends TestPluginRDFRankBase {
 	@ClassRule
 	public static TemporaryLocalFolder tmpFolder = new TemporaryLocalFolder();
 
 	private SimpleValueFactory VF = SimpleValueFactory.getInstance();
 
-	public TestPluginRDFRankWithRDFStarData(boolean useUpdate) {
+	public TestPluginRDFRankWithRDFTripleTermData(boolean useUpdate) {
 		super(useUpdate);
 	}
 
@@ -51,7 +51,7 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 	@Before
 	public void setUp() throws RepositoryException, SailException {
 		super.setUp();
-		load("TestPluginRDFRankRDFStarData.ttl");
+		load("TestPluginRDFRankRDFTripleTermsData.ttl");
 	}
 
 	protected void check(String fileName) {
@@ -59,7 +59,7 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 		// parse the ranks file
 		try {
 			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(TestPluginRDFRankWithRDFStarData.class.getResourceAsStream("/" + fileName)));
+					new InputStreamReader(TestPluginRDFRankWithRDFTripleTermData.class.getResourceAsStream("/" + fileName)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split("\\s+");
@@ -165,7 +165,7 @@ public class TestPluginRDFRankWithRDFStarData extends TestPluginRDFRankBase {
 
 	@Test
 	public void testBasicRDFRank() {
-		check("TestPluginRDFRankRDFStarData.out");
+		check("TestPluginRDFRankRDFTripleTermsData.out");
 	}
 
 	@Test
